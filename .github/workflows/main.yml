@@ -1,4 +1,4 @@
-# Builds the site (tools/build-static.js) and publishes it to GitHub Pages on every push to main.
+# Builds the site (tools/build-static.js) and publishes it to GitHub Pages.
 # One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Deploy to GitHub Pages
 
@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -26,15 +26,28 @@ jobs:
         with:
           node-version: 20
 
-      - id: pages
-        uses: actions/configure-pages@v5
+      # Turns Pages on if it isn't yet. If it can't, the deploy step below still works
+      # once Settings → Pages → Source is set to "GitHub Actions".
+      - uses: actions/configure-pages@v5
+        continue-on-error: true
+        with:
+          enablement: true
+
+      - name: Work out the site's base path
+        id: base
+        run: |
+          repo="${{ github.event.repository.name }}"
+          owner="${{ github.repository_owner }}"
+          if [ -n "${{ vars.PAGES_CNAME }}" ] || [ "${repo,,}" = "${owner,,}.github.io" ]; then
+            echo "path=" >> "$GITHUB_OUTPUT"      # served from the domain root
+          else
+            echo "path=/$repo" >> "$GITHUB_OUTPUT" # served from https://<user>.github.io/<repo>/
+          fi
 
       - name: Build static site
-        # base_path is "/MiiCreator" for https://<user>.github.io/MiiCreator/, empty for a custom domain
         run: node tools/build-static.js --out=dist-static
         env:
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          # Optional: a repo variable PAGES_CNAME (e.g. mii.example.com) publishes a CNAME file.
+          BASE_PATH: ${{ steps.base.outputs.path }}
           PAGES_CNAME: ${{ vars.PAGES_CNAME }}
 
       - uses: actions/upload-pages-artifact@v3
