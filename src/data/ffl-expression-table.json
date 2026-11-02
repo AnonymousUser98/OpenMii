@@ -1,0 +1,694 @@
+{
+  "0": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1,
+    "eyebrowLeftY": 0,
+    "eyebrowRightY": 0
+  },
+  "1": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 60,
+    "eyeRIndex": 60,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1
+  },
+  "2": {
+    "eyebrowRotate": 2,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 2,
+    "eyeRotateR": 2,
+    "mouthIndex": 10
+  },
+  "3": {
+    "eyebrowRotate": -2,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": -2,
+    "eyeRotateR": -2,
+    "mouthIndex": 12
+  },
+  "4": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 61,
+    "eyeRIndex": 61,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1,
+    "eyebrowLeftY": -2,
+    "eyebrowRightY": -2
+  },
+  "5": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 26,
+    "eyeRIndex": 26,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1
+  },
+  "6": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 36
+  },
+  "7": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 60,
+    "eyeRIndex": 60,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 36
+  },
+  "8": {
+    "eyebrowRotate": 2,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 2,
+    "eyeRotateR": 2,
+    "mouthIndex": 36
+  },
+  "9": {
+    "eyebrowRotate": -2,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": -2,
+    "eyeRotateR": -2,
+    "mouthIndex": 36
+  },
+  "10": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 61,
+    "eyeRIndex": 61,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 36,
+    "eyebrowLeftY": -2,
+    "eyebrowRightY": -2
+  },
+  "11": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 26,
+    "eyeRIndex": 26,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 36
+  },
+  "12": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1
+  },
+  "13": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1
+  },
+  "14": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 36
+  },
+  "15": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 36
+  },
+  "16": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 19
+  },
+  "17": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 19
+  },
+  "18": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 12
+  },
+  "19": {
+    "eyeLIndex": 64,
+    "eyeRIndex": 64,
+    "mouthIndex": 23,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0
+  },
+  "20": {
+    "eyeLIndex": 64,
+    "eyeRIndex": 64,
+    "mouthIndex": 36,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0
+  },
+  "21": {
+    "eyeLIndex": 26,
+    "eyeRIndex": 26,
+    "mouthIndex": 23,
+    "eyeRotate": -1,
+    "eyeRotateR": -1,
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -2,
+    "eyebrowRightY": -2
+  },
+  "22": {
+    "eyeLIndex": 26,
+    "eyeRIndex": 26,
+    "mouthIndex": 45,
+    "eyeRotate": -1,
+    "eyeRotateR": -1,
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -2,
+    "eyebrowRightY": -2
+  },
+  "23": {
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "eyeRotIndex": 47,
+    "mouthIndex": 23,
+    "eyeRotate": 2,
+    "eyeRotateR": 2,
+    "eyebrowRotate": 2,
+    "mouthType": 1
+  },
+  "24": {
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "eyeRotIndex": 47,
+    "mouthIndex": 41,
+    "eyeRotate": 2,
+    "eyeRotateR": 2,
+    "eyebrowRotate": 2,
+    "mouthType": 1
+  },
+  "25": {
+    "eyeLIndex": 62,
+    "eyeRIndex": 62,
+    "mouthIndex": 23,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0,
+    "eyebrowLeftY": -1,
+    "eyebrowRightY": -1,
+    "eyeLType": 1,
+    "eyeRType": 1
+  },
+  "26": {
+    "eyeLIndex": 62,
+    "eyeRIndex": 62,
+    "mouthIndex": 38,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0,
+    "eyebrowLeftY": -1,
+    "eyebrowRightY": -1,
+    "eyeLType": 1,
+    "eyeRType": 1
+  },
+  "27": {
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "mouthIndex": 23,
+    "eyeRotate": 2,
+    "eyeRotateR": 2,
+    "eyebrowRotate": 2
+  },
+  "28": {
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "mouthIndex": 37,
+    "eyeRotate": 2,
+    "eyeRotateR": 2,
+    "eyebrowRotate": 2,
+    "mouthType": 1
+  },
+  "29": {
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "mouthIndex": 23,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3
+  },
+  "30": {
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "mouthIndex": 45,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3
+  },
+  "31": {
+    "eyeLIndex": 60,
+    "eyeRIndex": 60,
+    "mouthIndex": 23,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0
+  },
+  "32": {
+    "eyeLIndex": 60,
+    "eyeRIndex": 60,
+    "mouthIndex": 38,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0
+  },
+  "33": {
+    "eyeLIndex": 75,
+    "eyeRIndex": 47,
+    "eyeRotIndex": 75,
+    "mouthIndex": 44,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0,
+    "mouthType": 1
+  },
+  "34": {
+    "eyeLIndex": 47,
+    "eyeRIndex": 75,
+    "eyeRotIndex": 75,
+    "mouthIndex": 44,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 0,
+    "mouthType": 1
+  },
+  "35": {
+    "eyeLIndex": 65,
+    "eyeRIndex": 65,
+    "mouthIndex": 39,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 1,
+    "eyebrowIndex": 27,
+    "eyeLType": 1,
+    "eyeRType": 1,
+    "mouthType": 1
+  },
+  "36": {
+    "eyeLIndex": 65,
+    "eyeRIndex": 65,
+    "mouthIndex": 40,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 1,
+    "eyebrowIndex": 27,
+    "eyeLType": 1,
+    "eyeRType": 1,
+    "mouthType": 1
+  },
+  "37": {
+    "eyeLIndex": 64,
+    "eyeRIndex": 64,
+    "mouthIndex": 15,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 2
+  },
+  "38": {
+    "eyeLIndex": 64,
+    "eyeRIndex": 64,
+    "mouthIndex": 36,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "eyebrowRotate": 2
+  },
+  "39": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 69,
+    "eyeRIndex": 69,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 42,
+    "eyebrowIndex": 27,
+    "mouthType": 1
+  },
+  "40": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 69,
+    "eyeRIndex": 69,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 43,
+    "eyebrowIndex": 27,
+    "mouthType": 1
+  },
+  "41": {
+    "eyebrowRotate": 2,
+    "eyeLIndex": 63,
+    "eyeRIndex": 63,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 46
+  },
+  "43": {
+    "eyebrowRotate": 1,
+    "eyeLIndex": 66,
+    "eyeRIndex": 66,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 14
+  },
+  "45": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 47,
+    "mouthType": 1
+  },
+  "47": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 74,
+    "eyeRIndex": 75,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 32
+  },
+  "48": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 75,
+    "eyeRIndex": 74,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 32
+  },
+  "49": {
+    "eyebrowIndex": 25,
+    "eyebrowRotate": 0,
+    "eyeLIndex": 67,
+    "eyeRIndex": 67,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 48,
+    "mouthType": 1
+  },
+  "51": {
+    "eyebrowIndex": 26,
+    "eyebrowRotate": 0,
+    "eyeLIndex": 68,
+    "eyeRIndex": 68,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 49,
+    "mouthType": 1
+  },
+  "53": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 50,
+    "mouthType": 1
+  },
+  "55": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3,
+    "eyeLIndex": 73,
+    "eyeRIndex": 72,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 23,
+    "eyeLType": 1,
+    "eyeRType": 1
+  },
+  "56": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3,
+    "eyeLIndex": 73,
+    "eyeRIndex": 72,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 38,
+    "eyeLType": 1,
+    "eyeRType": 1
+  },
+  "57": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3,
+    "eyeLIndex": 71,
+    "eyeRIndex": 70,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 23,
+    "eyeLType": 1,
+    "eyeRType": 1
+  },
+  "58": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3,
+    "eyeLIndex": 71,
+    "eyeRIndex": 70,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 45,
+    "eyeLType": 1,
+    "eyeRType": 1
+  },
+  "59": {
+    "eyebrowRotate": -2,
+    "eyeLIndex": 23,
+    "eyeRIndex": 23,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 23
+  },
+  "60": {
+    "eyebrowRotate": -2,
+    "eyeLIndex": 23,
+    "eyeRIndex": 23,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 38
+  },
+  "61": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": -1
+  },
+  "63": {
+    "eyebrowRotate": -1,
+    "eyebrowIndex": 13,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 23,
+    "eyebrowLeftY": -2,
+    "eyebrowRightY": -2
+  },
+  "64": {
+    "eyebrowRotate": -1,
+    "eyebrowIndex": 13,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 46,
+    "eyebrowLeftY": -2,
+    "eyebrowRightY": -2
+  },
+  "65": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3,
+    "eyeLIndex": 77,
+    "eyeRIndex": 76,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 23
+  },
+  "66": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -3,
+    "eyebrowRightY": -3,
+    "eyeLIndex": 77,
+    "eyeRIndex": 76,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 38
+  },
+  "67": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 79,
+    "eyeRIndex": 79,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 51
+  },
+  "68": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 79,
+    "eyeRIndex": 79,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 51
+  },
+  "69": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 78,
+    "eyeRIndex": 78,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 2
+  },
+  "70": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -1,
+    "eyebrowRightY": -1,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 35,
+    "mouthRotate": 3
+  },
+  "71": {
+    "eyebrowRotate": 2,
+    "eyebrowLeftY": 1,
+    "eyebrowRightY": 1,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 1,
+    "eyeRotateR": 1,
+    "mouthIndex": 25,
+    "mouthRotate": 4
+  },
+  "72": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 3,
+    "mouthRotate": 3
+  },
+  "73": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 26,
+    "eyeRIndex": 26,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 31,
+    "mouthRotate": 1
+  },
+  "74": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": 26,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 31,
+    "mouthRotate": 1
+  },
+  "75": {
+    "eyebrowRotate": -1,
+    "eyebrowLeftY": 0.5,
+    "eyebrowRightY": -1.5,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 35,
+    "mouthRotate": 2
+  },
+  "76": {
+    "eyebrowRotate": -2,
+    "eyebrowLeftY": -1.5,
+    "eyebrowRightY": 0.5,
+    "eyeLIndex": -1,
+    "eyeRIndex": -1,
+    "eyeRotate": -2,
+    "eyeRotateR": -2,
+    "mouthIndex": 10,
+    "mouthRotate": -190
+  },
+  "77": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": 47,
+    "eyeRIndex": -1,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 51
+  },
+  "78": {
+    "eyebrowRotate": 0,
+    "eyeLIndex": -1,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 51
+  },
+  "79": {
+    "eyebrowRotate": -1,
+    "eyeLIndex": 26,
+    "eyeRIndex": 26,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 30,
+    "eyebrowLeftY": 1,
+    "eyebrowRightY": 1
+  },
+  "80": {
+    "eyebrowRotate": 1,
+    "eyeLIndex": 47,
+    "eyeRIndex": 47,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 14
+  },
+  "81": {
+    "eyebrowRotate": 2,
+    "eyeLIndex": 61,
+    "eyeRIndex": 61,
+    "eyeRotate": 0,
+    "eyeRotateR": 0,
+    "mouthIndex": 10
+  }
+}

@@ -1,0 +1,89 @@
+[
+  {
+    "file": "acce_01.glb",
+    "mdlType": 1,
+    "texType": 2
+  },
+  {
+    "file": "acce_02.glb",
+    "mdlType": 1,
+    "texType": 2
+  },
+  {
+    "file": "Acce_03.glb",
+    "mdlType": 1,
+    "texType": 2
+  },
+  {
+    "file": "acce_04.glb",
+    "mdlType": 2,
+    "texType": 2
+  },
+  {
+    "file": "acce_05.glb",
+    "mdlType": 2,
+    "texType": 2
+  },
+  {
+    "file": "acce_06.glb",
+    "mdlType": 2,
+    "texType": 2,
+    "texFiltering": 1003,
+    "anmType": 2
+  },
+  {
+    "file": "acce_07.glb",
+    "mdlType": 0,
+    "texType": 2
+  },
+  {
+    "file": "acce_08.glb",
+    "mdlType": 0,
+    "texType": 2
+  },
+  {
+    "file": "Acce_09.glb",
+    "mdlType": 1,
+    "texType": 2
+  },
+  {
+    "file": "Acce_10_Bat.glb",
+    "mdlType": 1,
+    "texType": 2
+  },
+  {
+    "file": "Acce_11_WindupKey.glb",
+    "mdlType": 1,
+    "texType": 2
+  },
+  {
+    "file": "Acce_12_Tank.glb",
+    "mdlType": 0,
+    "texType": 2
+  },
+  {
+    "file": "Acce_13_bracelet.glb",
+    "mdlType": 3,
+    "texType": 2
+  },
+  {
+    "file": "Acce_14_gloves.glb",
+    "mdlType": 3,
+    "texType": 2
+  },
+  {
+    "file": "Acce_15_Bunny.glb",
+    "mdlType": 2,
+    "texType": 2
+  },
+  {
+    "file": "Acce_16_bandana.glb",
+    "mdlType": 0,
+    "texType": 2
+  },
+  {
+    "file": "Acce_17_Crowbar.glb",
+    "mdlType": 1,
+    "texType": 2
+  }
+]
