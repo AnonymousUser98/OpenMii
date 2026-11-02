@@ -1,0 +1,13 @@
+{
+  "name": "mii-creator",
+  "version": "2026.10.0",
+  "private": true,
+  "description": "Mii Creator — open-source, readable source of the Mii Creator web app.",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js --watch",
+    "build": "node tools/build.js",
+    "build:static": "node tools/build-static.js"
+  }
+}

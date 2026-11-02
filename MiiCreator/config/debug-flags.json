@@ -1,0 +1,4 @@
+{
+  "//": "Hidden switches that make main.js load custom part assets from public/. A flag only turns on when its files exist (see lib/debug-flags.js). Set one to false to keep it off.",
+  "eyeScleraHack": true
+}

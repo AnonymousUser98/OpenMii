@@ -1,0 +1,587 @@
+// src/app/editor/editor.js
+// MiiEditor: the editor screen.
+//
+// Defines: MiiEditor
+// Uses from other files:
+//   app/editor/tab-ids.js: TAB_FACE, TAB_HAIR, TAB_EYEBROWS, TAB_EYES, TAB_NOSE, TAB_MOUTH,
+//                          TAB_BEARD, TAB_MOLE, TAB_GLASSES, TAB_SCALE, TAB_HAT, TAB_OUTFIT, … (+7
+//                          more)
+//   app/mii/colors.js: FAVORITE_COLORS_INT, FAVORITE_COLOR_GRADIENTS, COMMON_COLORS_HEX,
+//                      COMMON_COLORS_SHADOW_HEX
+//   app/util/colors-and-bytes.js: adjustLightness, id, bytesToBase64
+//   app/ui/components.js: addButtonSounds, createTabList, m7
+//   app/renderer/ffl-resources.js: Pd, waitForFFLResources
+//   app/ui/html.js: Html
+//   app/audio/sound-effects.js: playSound
+//   app/mii/formats/ffsd-miic.js: createDefaultMiicFields
+//   app/mii/mii.js: Mii
+//   app/ui/icons.js: SVG_ICONS
+//   app/ui/modal.js: Modal
+//   app/editor/tabs/hat-tab.js: hatTab
+//   … and 16 more files
+
+class MiiEditor {
+  mii;
+  icons;
+  ui;
+  dirty;
+  ready;
+  hairFlipToggle;
+  eyeScleraToggle;
+  onShutdown;
+  errors;
+  useAccessibility;
+  editLimits;
+  static getCurrentEditor() {
+    return g9;
+  }
+  #t;
+  get source() {
+    return this.#t;
+  }
+  #e = !1;
+  constructor(e, t, r, n, i = !0) {
+    if (MiiEditor.getCurrentEditor() !== null) throw Error("Cannot make multiple instances of MiiEditor!");
+    ((window.editor = this),
+      (g9 = this),
+      (this.#e = i),
+      (this.#t = n || 0),
+      document.dispatchEvent(new CustomEvent("editor-launch")),
+      this.showLoadIndicator(),
+      (this.dirty = !1),
+      (this.ready = !1),
+      (this.errors = /*@__PURE__*/ new Map()));
+    let o = Rce;
+    if (e === 1) o = Oce;
+    if (r) o = r;
+    if (t) this.onShutdown = t;
+    let a = new Mii(o, 1).exportBase64("miic");
+    if (((this.mii = new Mii(a, 1)), !r)) this.mii.nickname = "";
+    if (((editorMii = this.mii), (this.mii.miicVersion = 7), this.mii.nickname.trim() === ""))
+      this.errors.set("Name", {
+        valid: !1,
+        reason: translate("A name must be given using the details tab"),
+      });
+    this.#A();
+  }
+  #n = !1;
+  #i = !1;
+  #r(e) {
+    if (this.#n) return;
+    this.#n = !0;
+    let t = "ghost",
+      r = "",
+      i = {
+        miitomo: { i: 21, c: 19 },
+        wii: { i: 8, c: 7 },
+        wiiu: { i: 11, c: 4 },
+        streetpass: { i: 3, c: 4 },
+        switch: { i: 7, c: 16 },
+      }[e];
+    function o(a) {
+      if (typeof a === "string") return a;
+      return `Pose.${a.toString().padStart(2, "0")}`;
+    }
+    let s = async (a) => {
+      if (this.#i) return;
+      if (document.activeElement !== null && document.activeElement === document.body) {
+        let l = a.key.toLowerCase();
+        if (((r += l), r.length > t.length)) r = r.slice(-t.length);
+        if (r === t) {
+          if (
+            ((this.#i = !0),
+            (this.mii.height = Math.min(this.mii.height, 127)),
+            (this.mii.build = Math.min(this.mii.build, 127)),
+            this.mii.personality !== 24)
+          ) {
+            if (
+              (playSound("undo"),
+              this.#l(),
+              (this.mii.personality = 24),
+              await this.render(!0, 0, 1),
+              this.ui.scene.setExpression(10),
+              e)
+            )
+              (this.ui.scene.swapAnimation(o(i.i), !1, !0),
+                setTimeout(() => {
+                  (this.ui.scene.setExpression(0),
+                    this.ui.scene.swapAnimation(this.ui.scene.getWaitAnimation(), !1, !1),
+                    this.enableUI(),
+                    (this.#i = !1));
+                }, 5000));
+            else
+              setTimeout(() => {
+                (this.ui.scene.setExpression(0), this.enableUI());
+              }, 2000);
+            Notify.show(
+              "..?",
+              `${this.mii.nickname.trim() == "" ? "Mii" : this.mii.nickname} became incorporeal.
+Look what you've done.`,
+            );
+          } else {
+            if (
+              (this.#l(),
+              (this.mii.personality = -1),
+              await this.render(!0, 0, 1),
+              this.ui.scene.setExpression(7),
+              playSound("receive"),
+              e)
+            )
+              (this.ui.scene.swapAnimation(o(i.c), !1, !0),
+                setTimeout(() => {
+                  (this.ui.scene.setExpression(0),
+                    this.ui.scene.swapAnimation(this.ui.scene.getWaitAnimation(), !1, !1),
+                    this.enableUI(),
+                    (this.#i = !1));
+                }, 3000));
+            else
+              setTimeout(() => {
+                (this.ui.scene.setExpression(0), this.enableUI());
+              }, 2000);
+            Notify.show(
+              "..?",
+              `${this.mii.nickname.trim() == "" ? "Mii" : this.mii.nickname} became corporeal again!
+They thank you very much..`,
+            );
+          }
+          this.callTab(this.#p);
+        }
+      }
+    };
+    (document.addEventListener("keydown", s),
+      (this.#o = () => {
+        document.removeEventListener("keydown", s);
+      }));
+  }
+  #o = null;
+  #c;
+  showLoadIndicator() {
+    let e = () => {
+      if (this.ready) {
+        this.hideLoadIndicator();
+        return;
+      } else if (this.ui) {
+        if (this.ui.mii) {
+          if (this.ui.mii.qs(".loader")) this.ui.mii.qs(".loader").classOn("active");
+        }
+      }
+    };
+    (e(), (this.#c = setInterval(e, 1000)));
+  }
+  hideLoadIndicator() {
+    if ((clearInterval(this.#c), this.ui.mii.qs(".loader")))
+      this.ui.mii.qs(".loader").classOff("active");
+  }
+  async #A() {
+    let e = await getSetting("accessibilityFeature"),
+      t = await getSetting("editLimits");
+    if (
+      ((this.useAccessibility = e),
+      (this.editLimits = t),
+      (this.icons = Pd()),
+      (this.ui = {}),
+      this.#m(),
+      this.#u(),
+      await this.#f(),
+      this.#h(),
+      await this.render(void 0, void 0, 1),
+      (this.ready = !0),
+      this.source === 1)
+    )
+      this.#l();
+  }
+  #m() {
+    this.ui.base = new Html("div").class("ui-base").appendTo("body");
+  }
+  async #f() {
+    ((this.ui.mii = new Html("div").class("mii-holder").appendTo(this.ui.base)),
+      this.ui.mii.append(new Html("div").html(SVG_ICONS.loading).class("loader", "active")),
+      this.ui.mii.append(new Html("div").class("sparkle-container")),
+      document.addEventListener("pointerdown", dG),
+      (this.hairFlipToggle = addButtonSounds(
+        new Html("button")
+          .style({ position: "absolute", top: "5rem", right: "1rem" })
+          .html(SVG_ICONS.hair_flip)
+          .on("click", () => {
+            ((this.mii.hairFlip = Number(!this.mii.hairFlip)), this.render(!0, 0, 0));
+          })
+          .appendTo(this.ui.mii),
+      )),
+      (this.eyeScleraToggle = addButtonSounds(
+        new Html("button")
+          .style({ position: "absolute", top: "5rem", right: "1rem" })
+          .html(SVG_ICONS.eye_sclera)
+          .on("click", () => {
+            ((this.mii.eyeSclera = Number(!this.mii.eyeSclera)), this.render(!0, 0, 0));
+          })
+          .appendTo(this.ui.mii),
+      )));
+    let e = addButtonSounds(
+        new Html("button")
+          .class("square", "bottom-left")
+          .html(SVG_ICONS.rotate)
+          .appendTo(this.ui.mii)
+          .on("click", () => {
+            this.ui.scene.cameraRotate();
+          }),
+      ),
+      t = addButtonSounds(
+        new Html("button")
+          .class("square", "bottom-right")
+          .html(SVG_ICONS.recenter)
+          .appendTo(this.ui.mii)
+          .on("click", () => {
+            this.ui.scene.cameraRecenter();
+          }),
+      );
+    if (this.editLimits !== "miic") {
+      let r = new Html("span").class("top-left").appendTo(this.ui.mii).style({ "max-width": "90vw" });
+      switch (
+        (r.on("click", () => {
+          Modal.alert(
+            translate("Notice"),
+            translate(`You have Editor Limits enabled, which is restricting options.
+If you want to use all Mii Creator features, change it in Settings -> Editor.`),
+          );
+        }),
+        this.editLimits)
+      ) {
+        case "wii":
+          r.html(SVG_ICONS.edit_limits_wii);
+          break;
+        case "3ds_wiiu":
+          r.html(SVG_ICONS.edit_limits_wiiu);
+          break;
+        case "switch":
+          r.html(SVG_ICONS.edit_limits_switch);
+          break;
+      }
+    }
+    if (this.useAccessibility === !1)
+      (this.hairFlipToggle.style({
+        "z-index": "1",
+        background: "transparent",
+        color: "transparent",
+        border: "0",
+        "border-radius": "8px",
+        padding: "0",
+      }),
+        this.eyeScleraToggle.style({
+          "z-index": "1",
+          background: "transparent",
+          color: "transparent",
+          border: "0",
+          "border-radius": "8px",
+          padding: "0",
+        }));
+    else
+      (e.text(translate("Rotate")),
+        t.text(translate("Recenter")),
+        this.hairFlipToggle.text(translate("Flip Hair")),
+        this.eyeScleraToggle.text(translate("Toggle Sclera")));
+  }
+  async #s() {
+    (await waitForFFLResources(),
+      (this.ui.scene = new MiiViewer(this.mii, this.ui.mii.elm, void 0, void 0, void 0, this)),
+      await this.ui.scene.init(),
+      this.ui.mii.append(this.ui.scene.getRendererElement()),
+      window.addEventListener("resize", () => {
+        this.ui.scene.resize();
+      }),
+      this.ui.scene.focusCamera(0),
+      this.ui.scene.getRendererElement().classList.add("ready"),
+      this.ui.scene.getRendererElement().addEventListener("dblclick", () => {
+        this.ui.scene.cameraRecenter(!0);
+      }),
+      this.ui.mii.qs(".loader").classOff("active"),
+      getSetting("shaderTypeN").then((e) => {
+        ((this.#g = e),
+          getSetting("bodyModelN").then((t) => {
+            this.#r(t);
+          }));
+      }));
+  }
+  #g;
+  get shaderType() {
+    return this.#g;
+  }
+  async #u() {
+    if (this.ui) {
+      if (this.ui.scene) this.#g = this.ui.scene.shaderType;
+    }
+    let e = COMMON_COLORS_HEX[this.mii.glassColor],
+      t = COMMON_COLORS_HEX[this.mii.eyeColor],
+      r = { top: COMMON_COLORS_SHADOW_HEX[this.mii.mouthColor], bottom: COMMON_COLORS_HEX[this.mii.mouthColor] },
+      n = (p) => "rgb(" + p.map((g) => g * 255).join(",") + ")",
+      i = n(this.mii.getHatPrimaryColor()),
+      o = n(id(this.mii.favoriteColor, this.mii.hatFavoriteColor, this.mii.hatCommonColor)[0]),
+      s = n(this.mii.getHatSecondaryColor(!0)),
+      a = n(adjustLightness(this.mii.getHatSecondaryColor(!0), -0.15)),
+      l = this.mii.hatSecondaryColor !== -1 ? s : "#fff",
+      c = this.mii.hatSecondaryColor !== -1 ? a : "#ccc",
+      u = n(this.mii.getHatTertiaryColor(!0)),
+      d = n(adjustLightness(this.mii.getHatTertiaryColor(), -0.15)),
+      h = this.mii.hatTertiaryColor !== -1 ? u : "#8B4F00",
+      f = this.mii.hatTertiaryColor !== -1 ? d : "#582900";
+    if (
+      (this.ui.base.attr({
+        "data-hair-flip": this.mii.hairFlip ? "yes" : "no",
+        "data-tab-num": this.#p,
+      }),
+      this.useAccessibility)
+    )
+      this.ui.base.style({
+        "--eye-color": "#787880",
+        "--icon-lip-color-top": "#780c0c",
+        "--icon-lip-color-bottom": "#f00c08",
+        "--icon-hair-tie": "#" + FAVORITE_COLORS_INT[this.mii.favoriteColor].toString(16).padStart(6, "0"),
+        "--icon-eyebrow-fill": "var(--text)",
+        "--icon-hair-fill": "var(--text)",
+        "--icon-hair-tip": "var(--stroke)",
+        "--icon-facial-hair-fill": "#9b9b9b",
+        "--icon-hat-fill": FAVORITE_COLOR_GRADIENTS[0].top,
+        "--icon-hat-stroke": FAVORITE_COLOR_GRADIENTS[0].bottom,
+        "--icon-custom-hat-fill": i,
+        "--icon-custom-hat-stroke": o,
+        "--icon-custom-hat-secondary": s,
+        "--icon-custom-hat-secondary-stroke": a,
+        "--icon-custom-hat-tertiary": u,
+        "--icon-custom-hat-tertiary-stroke": d,
+        "--icon-custom-hat-quaternary": l,
+        "--icon-custom-hat-quaternary-stroke": c,
+        "--icon-custom-hat-quinary": h,
+        "--icon-custom-hat-quinary-stroke": f,
+        "--icon-glasses-fill": "#787880",
+        "--icon-glasses-shade": "#78788077",
+      });
+    else
+      this.ui.base.style({
+        "--eye-color": t,
+        "--icon-lip-color-top": r.top,
+        "--icon-lip-color-bottom": r.bottom,
+        "--icon-hair-tie": "#" + FAVORITE_COLORS_INT[this.mii.favoriteColor].toString(16).padStart(6, "0"),
+        "--icon-eyebrow-fill": COMMON_COLORS_HEX[this.mii.eyebrowColor],
+        "--icon-hair-fill": COMMON_COLORS_HEX[this.mii.hairColor],
+        "--icon-hair-tip": COMMON_COLORS_HEX[this.mii.hairTipColor],
+        "--icon-facial-hair-fill": COMMON_COLORS_HEX[this.mii.beardColor],
+        "--icon-hat-fill": FAVORITE_COLOR_GRADIENTS[0].top,
+        "--icon-hat-stroke": FAVORITE_COLOR_GRADIENTS[0].bottom,
+        "--icon-custom-hat-fill": i,
+        "--icon-custom-hat-stroke": o,
+        "--icon-custom-hat-secondary": s,
+        "--icon-custom-hat-secondary-stroke": a,
+        "--icon-custom-hat-tertiary": u,
+        "--icon-custom-hat-tertiary-stroke": d,
+        "--icon-custom-hat-quaternary": l,
+        "--icon-custom-hat-quaternary-stroke": c,
+        "--icon-custom-hat-quinary": h,
+        "--icon-custom-hat-quinary-stroke": f,
+        "--icon-glasses-fill": e,
+        "--icon-glasses-shade": e + "77",
+      });
+    if (this.eyeScleraToggle) this.eyeScleraToggle.style({ display: "none" });
+    if (this.hairFlipToggle) this.hairFlipToggle.style({ display: "none" });
+    if (this.#p === 1) {
+      if (m7[this.mii.hairType] === 0) this.hairFlipToggle.style({ display: "flex" });
+    } else if (this.#p === 3 && (this.mii.personality === 24 || this.mii.eyeColor !== 8)) {
+      if (this.eyeScleraToggle) this.eyeScleraToggle.style({ display: "flex" });
+    }
+  }
+  #p = 0;
+  #a;
+  callTab(e) {
+    if (!this.#a[e]) return;
+    (this.ui.tabContent.clear(), this.#a[e](this.ui.tabContent));
+  }
+  onChangeTab = /*@__PURE__*/ new Map();
+  #h() {
+    this.#a = [];
+    let e = 0,
+      t = (n, i, o) => {
+        let s = async (a) => {
+          if (this.ui.scene) this.ui.scene.focusCamera(o);
+          if (
+            ((this.#p = n),
+            this.#u(),
+            await Promise.all(Array.from(this.onChangeTab.values()).map((l) => l(this.#p))),
+            await i({
+              container: a,
+              callback: (l, c, u, d) => {
+                ((this.mii = l), (editorMii = l), this.render(c, u, d), this.#u(), (this.dirty = !0));
+              },
+              icons: this.icons,
+              mii: this.mii,
+              editor: this,
+              useAccessibility: this.useAccessibility,
+              editLimits: this.editLimits,
+            }),
+            this.ui.scene)
+          )
+            this.ui.scene.resize();
+        };
+        return ((this.#a[e] = s), e++, s);
+      },
+      r = createTabList([
+        { icon: SVG_ICONS.head, select: t(TAB_FACE, faceTab, 0) },
+        { icon: SVG_ICONS.hair, select: t(TAB_HAIR, hairTab, 0) },
+        { icon: SVG_ICONS.eyebrows, select: t(TAB_EYEBROWS, eyebrowsTab, 0) },
+        { icon: SVG_ICONS.eyes, select: t(TAB_EYES, eyesTab, 0) },
+        { icon: SVG_ICONS.nose, select: t(TAB_NOSE, noseTab, 0) },
+        { icon: SVG_ICONS.mouth, select: t(TAB_MOUTH, mouthTab, 0) },
+        { icon: SVG_ICONS.facialHair, select: t(TAB_BEARD, beardTab, 0) },
+        { icon: SVG_ICONS.mole, select: t(TAB_MOLE, moleTab, 0) },
+        { icon: SVG_ICONS.glasses, select: t(TAB_GLASSES, glassesTab, 0) },
+        { icon: SVG_ICONS.scale, select: t(TAB_SCALE, scaleTab, 2) },
+        this.editLimits === "miic" ? { icon: SVG_ICONS.hat, select: t(TAB_HAT, hatTab, 0) } : void 0,
+        this.editLimits === "miic" ? { icon: SVG_ICONS.clothes, select: t(TAB_OUTFIT, outfitTab, 1) } : void 0,
+        this.editLimits === "miic" ? { icon: SVG_ICONS.accessory, select: t(TAB_ACCESSORY, accessoryTab, 1) } : void 0,
+        { icon: SVG_ICONS.details, select: t(TAB_PROFILE, profileTab, 1) },
+        {
+          icon: SVG_ICONS.save + `<span>${translate("Save")}</span>`,
+          type: "tab-save",
+          select: () => {
+            if (this.dirty === !0)
+              Modal.modal(
+                translate("Save Mii"),
+                translate("Would you like to save?"),
+                "body",
+                {
+                  text: translate("Save & Exit"),
+                  callback: () => {
+                    this.shutdown();
+                  },
+                  type: "primary",
+                },
+                ...(this.#e
+                  ? [
+                      {
+                        text: translate("Exit without Saving"),
+                        callback: () => {
+                          this.shutdown(!1);
+                        },
+                      },
+                    ]
+                  : []),
+                { text: "Cancel" },
+              );
+            else
+              Modal.modal(
+                translate("Quitting Editor"),
+                translate("No changes were made. Are you sure you want to exit?"),
+                "body",
+                {
+                  text: translate("Save & Exit"),
+                  callback: () => {
+                    this.shutdown();
+                  },
+                },
+                { text: "Cancel" },
+                ...(this.#e
+                  ? [
+                      {
+                        text: translate("Exit without Saving"),
+                        callback: () => {
+                          this.shutdown(!1);
+                        },
+                      },
+                    ]
+                  : []),
+              );
+          },
+          update: !1,
+        },
+      ]);
+    ((this.ui.tabList = r.list),
+      (this.ui.tabContent = r.content),
+      this.ui.base.appendMany(r.list, r.content));
+  }
+  async render(e = !0, t = 0, r) {
+    this.#u();
+    var n;
+    try {
+      n = this.mii.verify();
+    } catch (i) {
+      if (n) {
+        if (!n.valid)
+          n.reasons.forEach((o) => {
+            this.mii[o.prop] = createDefaultMiicFields()[o.prop];
+          });
+      }
+    }
+    if (this.ui.mii.qs("canvas.scene") === null) await this.#s();
+    if (
+      (this.ui.mii.qs("canvas.scene")?.style({ display: "block" }),
+      (this.ui.scene.mii = this.mii),
+      t === 2)
+    ) {
+      if ((await this.ui.scene.updateBody(r), r === 1)) await this.ui.scene.updateBody(1);
+      this.ui.scene.resize();
+    } else if (e) {
+      if (r === 1) this.ui.scene.needsClothingUpdate = !0;
+      if ((await this.ui.scene.updateMiiHead(t), r !== 0)) await this.ui.scene.updateBody(r);
+      if (r === 1)
+        setTimeout(() => {
+          this.ui.scene.updateBody(1);
+        }, 13.33);
+      (this.ui.scene.sparkle(), this.ui.scene.resize());
+    }
+  }
+  #l() {
+    (this.ui.mii.qs("button").classOn("disabled"),
+      this.ui.tabList.classOn("disabled"),
+      this.ui.tabContent.classOn("disabled"));
+  }
+  enableUI() {
+    (this.ui.mii.qs("button").classOff("disabled"),
+      this.ui.tabList.classOff("disabled"),
+      this.ui.tabContent.classOff("disabled"));
+  }
+  async shutdown(e = !0, t = !0) {
+    if ((document.removeEventListener("pointerdown", dG), this.#o)) this.#o();
+    if (e) {
+      if (Array.from(this.errors.values()).find((r) => r.valid === !1)) {
+        let r = [];
+        for (let n of this.errors.values()) if (n.valid === !1) r.push(n.reason);
+        Modal.alert(
+          translate("Notice"),
+          translate("You need to fix the following issues before you can save:") +
+            `
+
+` +
+            r.map((n) => `• ${n}`).join(`
+`),
+        );
+        return;
+      }
+      (await new Promise((r, n) => {
+        (this.#l(),
+          this.ui.scene.playEndingAnimation(),
+          setTimeout(() => {
+            r(null);
+          }, 1500));
+      }),
+        await fetch("/api/archive", {
+          body: JSON.stringify({
+            nickname: this.mii.nickname,
+            creator: this.mii.creator,
+            ffsd: this.mii.exportBase64("ffsd"),
+            data: this.mii.exportBase64("miic"),
+            studio: this.mii.exportBase64("studioData"),
+          }),
+          method: "POST",
+          headers: { "content-type": "application/json" },
+        }).catch(void 0));
+    }
+    if (this.#c) clearInterval(this.#c);
+    (this.ui.base.classOn("closing"),
+      setTimeout(() => {
+        if (this.ui.scene) this.ui.scene.shutdown();
+        if ((this.ui.base.cleanup(), t)) {
+          if (this.onShutdown) this.onShutdown(bytesToBase64(this.mii.export("miic")), e);
+        }
+        (document.dispatchEvent(new CustomEvent("editor-shutdown")),
+          (window.editor = null),
+          (g9 = null));
+      }, 500));
+  }
+}

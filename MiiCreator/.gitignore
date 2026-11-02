@@ -1,0 +1,9 @@
+# built files
+public/dist/main.js
+dist-static/
+
+# your local library (server.js)
+data/
+
+node_modules/
+.DS_Store

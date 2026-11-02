@@ -1,0 +1,52 @@
+# Builds the site (tools/build-static.js) and publishes it to GitHub Pages on every push to main.
+# One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build static site
+        # base_path is "/MiiCreator" for https://<user>.github.io/MiiCreator/, empty for a custom domain
+        run: node tools/build-static.js --out=dist-static
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          # Optional: a repo variable PAGES_CNAME (e.g. mii.example.com) publishes a CNAME file.
+          PAGES_CNAME: ${{ vars.PAGES_CNAME }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-static
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

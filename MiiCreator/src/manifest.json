@@ -1,0 +1,481 @@
+{
+  "//": "Files are joined in this order into public/dist/main.js by tools/build.js. They share one scope (like one big file), so order matters: a file can only use what earlier files define at load time.",
+  "files": [
+    {
+      "file": "app/mii/hex-colors.js",
+      "description": "Exact hex colours: the .miic \"MCX1\" block that stores colours outside the standard palettes."
+    },
+    {
+      "file": "vendor/bundler-runtime.js",
+      "description": "Small helpers the bundler (Bun) adds for CommonJS interop and lazy modules."
+    },
+    {
+      "file": "vendor/localforage.js",
+      "description": "localForage: IndexedDB/localStorage wrapper used for settings and caches."
+    },
+    {
+      "file": "vendor/jszip.js",
+      "description": "JSZip: reads the zipped model/sound bundles."
+    },
+    {
+      "file": "vendor/struct-fu.js",
+      "description": "struct-fu: binary struct definitions for Mii data formats."
+    },
+    {
+      "file": "vendor/ndarray.js",
+      "description": "ndarray + is-buffer (dependencies of the texture tools)."
+    },
+    {
+      "file": "vendor/texture-formats.js",
+      "description": "Texture pixel-format conversion helpers."
+    },
+    {
+      "file": "vendor/umd-helpers.js",
+      "description": "Small UMD library bundled by a dependency."
+    },
+    {
+      "file": "vendor/dom-to-image-more.js",
+      "description": "dom-to-image-more: renders DOM elements to images (cards, reference sheets)."
+    },
+    {
+      "file": "app/ui/html.js",
+      "description": "Html: the tiny DOM helper every UI file uses (new Html(\"div\").class(...).text(...))."
+    },
+    {
+      "file": "app/audio/music.js",
+      "description": "Background music player."
+    },
+    {
+      "file": "app/audio/sound-effects.js",
+      "description": "UI sound effects (hover/select/press) and sound pack loading."
+    },
+    {
+      "file": "app/settings/palette-flags.js",
+      "description": "Runtime flags for the alternate default palette."
+    },
+    {
+      "file": "app/mii/colors.js",
+      "description": "Colour palettes (hair, eye, skin, favourite colours...) and index tables."
+    },
+    {
+      "file": "app/items/accessory-model-info.js",
+      "description": "Model/texture type for each accessory (index = acceType)."
+    },
+    {
+      "file": "vendor/gettext.js",
+      "description": "gettext.js: translation engine."
+    },
+    {
+      "file": "app/i18n/localization.js",
+      "description": "Translation setup: i18n instance, getTranslator(), loadLanguage()."
+    },
+    {
+      "file": "app/items/item-lists.js",
+      "description": "Names and model info for accessories, hats and outfits."
+    },
+    {
+      "file": "app/util/random.js",
+      "description": "range(), randomInt() and random byte helpers."
+    },
+    {
+      "file": "app/ui/birthday-input.js",
+      "description": "Birthday picker widget."
+    },
+    {
+      "file": "app/mii/formats/ffsd-miic.js",
+      "description": "FFSD (3DS/Wii U) and .miic formats: structs, conversion, validation limits."
+    },
+    {
+      "file": "app/mii/modulate-type.js",
+      "description": "ModulateType: which face/head part a mesh or texture is."
+    },
+    {
+      "file": "app/mii/formats/charinfo.js",
+      "description": "Switch CharInfo conversion and Wii feature limits."
+    },
+    {
+      "file": "app/util/colors-and-bytes.js",
+      "description": "Colour maths (RGB/HSL) and byte/base64/hex helpers."
+    },
+    {
+      "file": "app/mii/formats/studio-and-nx.js",
+      "description": "Mii Studio data and Switch CharInfo structs."
+    },
+    {
+      "file": "app/mii/mii.js",
+      "description": "Mii: the main Mii data class (every editable field, import/export to all formats)."
+    },
+    {
+      "file": "app/ui/icons.js",
+      "description": "SVG icons used across the UI."
+    },
+    {
+      "file": "app/ui/components.js",
+      "description": "Shared UI building blocks: tab lists, feature sets (item grids), separators."
+    },
+    {
+      "file": "app/ui/modal.js",
+      "description": "Modal dialogs: Modal.modal(), Modal.alert(), Modal.prompt(), Modal.input()."
+    },
+    {
+      "file": "app/editor/tabs/hat-tab.js",
+      "description": "Editor tab: Hat."
+    },
+    {
+      "file": "vendor/three/three.module.js",
+      "description": "three.js (r173) core, bundled. Exported names are restored (Vector3, Mesh, WebGLRenderer, ...)."
+    },
+    {
+      "file": "vendor/three/addons/GLTFExporter.js",
+      "description": "three.js GLTFExporter (3D model export)."
+    },
+    {
+      "file": "vendor/ktx-parse.js",
+      "description": "ktx-parse: KTX2 container reader."
+    },
+    {
+      "file": "vendor/three/addons/GLTFLoader.js",
+      "description": "three.js GLTFLoader (loads every .glb model)."
+    },
+    {
+      "file": "vendor/three/addons/KTX2Loader.js",
+      "description": "three.js KTX2Loader + Basis/Zstd workers (compressed textures)."
+    },
+    {
+      "file": "vendor/meshopt-decoder.js",
+      "description": "meshoptimizer decoder (compressed glTF meshes)."
+    },
+    {
+      "file": "app/renderer/three-module.js",
+      "description": "Gets the THREE namespace used by the renderer (getTHREE())."
+    },
+    {
+      "file": "app/renderer/ffl/expression-table.js",
+      "description": "Per-expression eye/mouth/eyebrow adjustments."
+    },
+    {
+      "file": "app/shaders/wiiu-shader.js",
+      "description": "Wii U shader (FFL SampleShader) — shader id \"wiiu\"."
+    },
+    {
+      "file": "app/renderer/dispose.js",
+      "description": "ResourceTracker and helpers that free GPU memory."
+    },
+    {
+      "file": "vendor/three-copy/math-and-color.js",
+      "description": "A second, partial copy of three.js maths (Matrix3, Color, ColorManagement) pulled in by the renderer."
+    },
+    {
+      "file": "app/renderer/ffl/part-colors.js",
+      "description": "Default colours per part, ColorRGBA."
+    },
+    {
+      "file": "app/renderer/ffl/char-model.js",
+      "description": "CharModel: builds a Mii head (meshes + mask/faceline textures) from CharInfo."
+    },
+    {
+      "file": "app/renderer/ffl/resource-reader.js",
+      "description": "FFLResourceReader: reads FFLResHigh/Middle/Low.dat (parts, textures, shapes)."
+    },
+    {
+      "file": "app/renderer/ffl/face-builder.js",
+      "description": "FFLFaceBuilder: creates part meshes and draws the face mask textures."
+    },
+    {
+      "file": "app/renderer/cameras.js",
+      "description": "View types, cameras and render-target helpers."
+    },
+    {
+      "file": "app/renderer/texture-compositing.js",
+      "description": "Texture compositing (hat/accessory/outfit textures) and accessory attachment."
+    },
+    {
+      "file": "app/renderer/bone-scaler.js",
+      "description": "BoneScaler: applies height/build to the body skeleton."
+    },
+    {
+      "file": "app/renderer/outfits.js",
+      "description": "Outfit textures and materials."
+    },
+    {
+      "file": "app/renderer/mii-model.js",
+      "description": "createMiiModel(): builds the full 3D Mii (head + body + hat + accessory)."
+    },
+    {
+      "file": "app/shaders/miitomo-shader.js",
+      "description": "Miitomo shader — shader id \"miitomo\"."
+    },
+    {
+      "file": "app/shaders/switch-shader-params.js",
+      "description": "Switch shader material parameters per part."
+    },
+    {
+      "file": "app/shaders/switch-shader.js",
+      "description": "Switch shader — shader id \"switch\"."
+    },
+    {
+      "file": "vendor/three-copy/materials.js",
+      "description": "A second, partial copy of three.js (Material, ShaderMaterial, vectors, Texture) used as the base of the custom shaders."
+    },
+    {
+      "file": "app/shaders/wiiu-variants.js",
+      "description": "Wii U variants — \"wiiu_blinn\" and \"wiiu_ffliconwithbody\" (Wii U (Bright))."
+    },
+    {
+      "file": "app/shaders/wii-shaders.js",
+      "description": "MatCap shaders: Mii Channel, Wii Play, Simple+, Wii Room, Resort, Simple."
+    },
+    {
+      "file": "app/shaders/toon-shader.js",
+      "description": "Toon shader — shader id \"toon\"."
+    },
+    {
+      "file": "app/shaders/no-lighting-shader.js",
+      "description": "No Lighting shader — shader id \"lightDisabled\"."
+    },
+    {
+      "file": "app/shaders/3ds-shaders.js",
+      "description": "3DS and Tomodachi Life shaders — shader ids \"3ds\" and \"3ds_alt\"."
+    },
+    {
+      "file": "app/shaders/shader-registry.js",
+      "description": "Shader registry: shader id -> material class, lighting setup, material conversion."
+    },
+    {
+      "file": "app/assets/models.js",
+      "description": "Model bundles (body/hat/accessory zips), GLTF loading, texture and MatCap caches."
+    },
+    {
+      "file": "app/editor/tabs/eyes-tab.js",
+      "description": "Editor tab: Eyes."
+    },
+    {
+      "file": "app/editor/tabs/eyebrows-tab.js",
+      "description": "Editor tab: Eyebrows."
+    },
+    {
+      "file": "app/editor/tabs/beard-tab.js",
+      "description": "Editor tab: Beard & mustache."
+    },
+    {
+      "file": "app/editor/tabs/glasses-tab.js",
+      "description": "Editor tab: Glasses."
+    },
+    {
+      "file": "app/editor/tabs/hair-tab.js",
+      "description": "Editor tab: Hair."
+    },
+    {
+      "file": "app/editor/tabs/face-tab.js",
+      "description": "Editor tab: Face (shape, makeup, wrinkles, face paint)."
+    },
+    {
+      "file": "app/editor/widgets.js",
+      "description": "Editor widgets: validated inputs, item lists, popup menus."
+    },
+    {
+      "file": "app/editor/tabs/profile-tab.js",
+      "description": "Editor tab: Profile (name, favourite colour, birthday...)."
+    },
+    {
+      "file": "app/editor/tabs/mole-tab.js",
+      "description": "Editor tab: Mole."
+    },
+    {
+      "file": "app/editor/tabs/mouth-tab.js",
+      "description": "Editor tab: Mouth."
+    },
+    {
+      "file": "app/editor/tabs/nose-tab.js",
+      "description": "Editor tab: Nose."
+    },
+    {
+      "file": "app/about/third-party-notices.js",
+      "description": "Licence notices for every bundled library (shown in the app)."
+    },
+    {
+      "file": "app/util/platform.js",
+      "description": "Platform flags."
+    },
+    {
+      "file": "vendor/marked.js",
+      "description": "marked: Markdown renderer (credits, notices)."
+    },
+    {
+      "file": "vendor/sortablejs.js",
+      "description": "SortableJS: drag-to-rearrange in the library."
+    },
+    {
+      "file": "app/library/icon-cache.js",
+      "description": "IconCache: cached library icons."
+    },
+    {
+      "file": "app/config.js",
+      "description": "APP_CONFIG: version, FFL resource files, external APIs."
+    },
+    {
+      "file": "app/util/download.js",
+      "description": "Downloads and clipboard helpers."
+    },
+    {
+      "file": "app/ui/notify.js",
+      "description": "Notify: toast notifications."
+    },
+    {
+      "file": "app/renderer/ffl-resources.js",
+      "description": "Loads the FFL resource file and creates the FFL module."
+    },
+    {
+      "file": "app/settings/settings.js",
+      "description": "SETTINGS_SECTIONS (everything in Settings), getSetting(), setSetting()."
+    },
+    {
+      "file": "app/about/credits.js",
+      "description": "Credits text."
+    },
+    {
+      "file": "vendor/gltf-transform.js",
+      "description": "glTF-Transform (+ gl-matrix parts): optimises exported 3D models."
+    },
+    {
+      "file": "app/export/model-export-utils.js",
+      "description": "Helpers for 3D model export (attributes, expressions, textures)."
+    },
+    {
+      "file": "app/settings/settings-dialog.js",
+      "description": "The Settings dialog."
+    },
+    {
+      "file": "vendor/three-copy/box3-render-target.js",
+      "description": "Part of the second three.js copy (Box3, RenderTarget)."
+    },
+    {
+      "file": "app/util/image.js",
+      "description": "Image helpers (scratch canvas, trimming)."
+    },
+    {
+      "file": "vendor/camera-controls.js",
+      "description": "camera-controls by yomotsu (editor camera)."
+    },
+    {
+      "file": "vendor/three-copy/object3d.js",
+      "description": "Part of the second three.js copy (Matrix4, Euler, Object3D, Scene)."
+    },
+    {
+      "file": "app/renderer/animation-controller.js",
+      "description": "AnimationController: plays body animations."
+    },
+    {
+      "file": "app/renderer/render-scene.js",
+      "description": "MiiRenderScene: offscreen scenes for renders and icons."
+    },
+    {
+      "file": "app/renderer/mii-viewer.js",
+      "description": "MiiViewer: the live 3D view in the editor (camera, animation, body)."
+    },
+    {
+      "file": "vendor/mediabunny.js",
+      "description": "Mediabunny: video/GIF encoding for animated renders."
+    },
+    {
+      "file": "vendor/gif-encoder.js",
+      "description": "WebAssembly GIF encoder glue."
+    },
+    {
+      "file": "app/render/custom-render.js",
+      "description": "Expressions list and the Custom Render dialog."
+    },
+    {
+      "file": "vendor/gl-matrix-mat4.js",
+      "description": "gl-matrix mat4 helpers."
+    },
+    {
+      "file": "app/export/model-export.js",
+      "description": "3D model export dialog and exporter."
+    },
+    {
+      "file": "app/library/selection-menu.js",
+      "description": "Library multi-select actions and new-Mii style picker."
+    },
+    {
+      "file": "app/mii/random-mii.js",
+      "description": "Random Mii generator (FFLiDatabaseRandom)."
+    },
+    {
+      "file": "app/dialogs/look-alike.js",
+      "description": "Look-alike picker and NNID lookup."
+    },
+    {
+      "file": "vendor/sjcl.js",
+      "description": "SJCL: crypto used for Mii QR codes."
+    },
+    {
+      "file": "vendor/zxing.js",
+      "description": "ZXing: QR code reading/writing."
+    },
+    {
+      "file": "app/qr/mii-qr.js",
+      "description": "Mii QR code encryption/decryption and camera scanning."
+    },
+    {
+      "file": "app/dialogs/save-and-scan.js",
+      "description": "\"Save this Mii?\" prompt, QR scanner dialog, random NNID Mii."
+    },
+    {
+      "file": "app/dialogs/create-mii.js",
+      "description": "\"Create Mii\" dialog (blank, random, look-alike, QR, NNID...)."
+    },
+    {
+      "file": "app/dialogs/export.js",
+      "description": "Export dialog: .miic/FFSD/QR/studio formats, render-image export."
+    },
+    {
+      "file": "app/dialogs/mii-card.js",
+      "description": "Mii info card and reference sheet images, share dialog."
+    },
+    {
+      "file": "app/dialogs/render-and-save.js",
+      "description": "Render menu and the editor's save handler."
+    },
+    {
+      "file": "app/library/library.js",
+      "description": "The library screen: icons, /api/library requests, Mii pickers, Personal Mii."
+    },
+    {
+      "file": "app/editor/ffsd-warning.js",
+      "description": "Warning shown before converting a Mii with extended features to FFSD."
+    },
+    {
+      "file": "app/editor/tabs/scale-tab.js",
+      "description": "Editor tab: Scale (height, build) and compare mode."
+    },
+    {
+      "file": "app/editor/tabs/accessory-tab.js",
+      "description": "Editor tab: Accessory."
+    },
+    {
+      "file": "app/editor/tabs/outfit-tab.js",
+      "description": "Editor tab: Outfit."
+    },
+    {
+      "file": "app/editor/tab-ids.js",
+      "description": "Editor tab ids (TAB_FACE, TAB_HAIR, ...) and editor state."
+    },
+    {
+      "file": "app/editor/editor.js",
+      "description": "MiiEditor: the editor screen."
+    },
+    {
+      "file": "vendor/swiper.js",
+      "description": "Swiper: carousels in setup and pickers."
+    },
+    {
+      "file": "app/setup/first-run.js",
+      "description": "First-run setup (theme, colour, shader, Personal Mii)."
+    },
+    {
+      "file": "app/main.js",
+      "description": "Entry point: main() starts the app."
+    }
+  ]
+}
