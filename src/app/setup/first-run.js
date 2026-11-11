@@ -146,37 +146,7 @@ async function runFirstRunSetup() {
               ),
             ),
           ));
-      } else
-        (ei(
-          new Html("h2")
-            .class("full")
-            .style({ "text-align": "center" })
-            .text(e("Create your Personal Mii")),
-        ),
-          ei(
-            new Html("img")
-              .class("full")
-              .style({ "max-height": "240px", "object-fit": "contain" })
-              .attr({ src: "/assets/images/setup/banner.webp" }),
-          ),
-          ei(
-            new Html("span").style({ "text-align": "center" }).text(
-              e(`Let's create a Mii to represent you.
-This may only take a few minutes.
-
-Use Mii Creator’s custom features to stand out and be yourself!`),
-            ),
-          ),
-          ei(
-            addButtonSounds(
-              new Html("button")
-                .class("setup-btn")
-                .text(e("Next"))
-                .on("click", () => {
-                  ((mv = 0), t());
-                }),
-            ),
-          ));
+      }
     }),
     kr.modal.classOn("slideOut"),
     kr.root.style({ opacity: "0" }),
