@@ -98,6 +98,8 @@ async function runFirstRunSetup() {
     (ensureSetupRoot(),
     await new Promise(async (t) => {
       await transitionSetupPage(0);
+      setSetting("settings_tutorialClear", true);
+      window.location.reload();
       let r = await fetch("/api/personal_mii")
         .then((n) => n.json())
         .catch((n) => !1);
